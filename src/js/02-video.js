@@ -1,17 +1,16 @@
 import Player from '@vimeo/player';
+import throttle from 'lodash.throttle';
 
 const videoIframe = document.querySelector('iframe');
 
 const player = new Player(videoIframe);
+// Добавить прослушиватель событий для указанного события.
+//  Вызовет обратный вызов с одним параметром, который содержит данные для этого события.
+player.on('play', throttle(onPlay, 1000));
 
-player.on('play', function (e) {
-  e.preventDefault();
-  console.log('played the video!');
-});
+function onPlay({ seconds }) {
+  // Сохраняй время воспроизведения в локальное хранилище
+  localStorage.setItem('videoplayer-current-time', seconds);
+}
 
-// 1) Понять что от меня хотят
-// 2) Скачать и подключить библиотеку
-// 3) Подключил импорт
-// 4) Вытянул с HTML в JS iframe тег
-// 5) Прописать функцию с on('')
-//
+player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));

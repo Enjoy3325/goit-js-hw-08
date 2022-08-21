@@ -31,7 +31,7 @@ populateTextarea();
 
 function onFormSubmit(e) {
   e.preventDefault();
-  console.log('Отправляем форму');
+  // console.log('Отправляем форму');
   e.target.reset();
   // - Чистит из localStorage старое сообщение методом .removeItem и в ('ключ')
   localStorage.removeItem(STORAGE_KEY);
