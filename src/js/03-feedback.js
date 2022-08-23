@@ -8,7 +8,7 @@ const refs = {
 
 const STORAGE_KEY = 'feedback-form-state';
 
-document.addEventListener('DOMContentLoaded', setInputs);
+// document.addEventListener('DOMContentLoaded', setInputs);
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(setLocalStorage, 500));
 

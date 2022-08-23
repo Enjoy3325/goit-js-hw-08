@@ -6,11 +6,18 @@ const videoIframe = document.querySelector('iframe');
 const player = new Player(videoIframe);
 // Добавить прослушиватель событий для указанного события.
 //  Вызовет обратный вызов с одним параметром, который содержит данные для этого события.
-player.on('play', throttle(onPlay, 1000));
+player.on('timeupdate', throttle(onPlay, 1000));
 
-function onPlay({ seconds }) {
+function onPlay(e) {
   // Сохраняй время воспроизведения в локальное хранилище
-  localStorage.setItem('videoplayer-current-time', seconds);
+  localStorage.setItem('videoplayer-current-time', e.seconds);
 }
 
-player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+// player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+
+const numberKey = Number(localStorage.getItem('videoplayer-current-time'));
+
+if (numberKey) {
+  player.setCurrentTime(numberKey);
+}
+console.log(numberKey);
